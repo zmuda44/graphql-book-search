@@ -20,12 +20,18 @@ const typeDefs = `
     users: [User]
     books: [Book]
   }
+  type Mutation {
+  addUser(username: String!, email: String!): User
+  }
+
 `;
 
 module.exports = typeDefs;
 
+
+
 // type Mutation {
-//   addThought(thoughtText: String!, thoughtAuthor: String!): Thought
+//   addUser(username: String!, email: String!): User
 //   addComment(thoughtId: ID!, commentText: String!): Thought
 //   removeThought(thoughtId: ID!): Thought
 //   removeComment(thoughtId: ID!, commentId: ID!): Thought
