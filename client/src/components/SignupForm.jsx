@@ -17,6 +17,8 @@ const SignupForm = () => {
   // Use mutation for creating a user
   const [addUser, { error }] = useMutation(ADD_USER);
 
+ 
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
@@ -31,9 +33,11 @@ const SignupForm = () => {
       event.preventDefault();
       event.stopPropagation();
     }
-
+    console.log(userFormData)
     try {
       const response = await addUser(userFormData);
+
+      
 
       if (!response.ok) {
         throw new Error('something went wrong!');

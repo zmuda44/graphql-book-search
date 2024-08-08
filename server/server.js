@@ -29,6 +29,14 @@ const startApolloServer = async () => {
     context: authMiddleware
   }));
 
+  function graphql () {
+    console.log(addUser())
+
+  }
+
+  app.use('/graphql', (req, res) => {
+    console.log(req.body.query)});
+
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
 

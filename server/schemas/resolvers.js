@@ -1,4 +1,4 @@
-const { Class } = require('../models');
+const { User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 // Create the functions that fulfill the queries defined in `typeDefs.js`
@@ -11,6 +11,7 @@ const resolvers = {
   },
   Mutation: {
     addUser: async (parent, args) => {
+      console.log(args)
       const user = await User.create({ username, email, password });
 
       const token = signToken(user);
