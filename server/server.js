@@ -25,17 +25,27 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
-  app.use('/graphql', expressMiddleware(server, {
+ const myApp = app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
   }));
 
-  function graphql () {
-    console.log(addUser())
+//   console.log(myApp)
 
-  }
 
-  app.use('/graphql', (req, res) => {
-    console.log(req.body.query)});
+  // app.use('/graphql', (req, res) => {
+  //   console.log(req.body.query)});
+  //   mutation addUser($username: String!, $email: String!, $password: String!) {
+  //     [0]   addUser(username: $username, email: $email, password: $password) {
+  //     [0]     token
+  //     [0]     user {
+  //     [0]       _id
+  //     [0]       username
+  //     [0]       __typename
+  //     [0]     }
+  //     [0]     __typename
+  //     [0]   }
+  //     [0] }
+  //     [0] undefined
 
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
