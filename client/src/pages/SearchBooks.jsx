@@ -9,7 +9,9 @@ import {
 } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { searchGoogleBooks } from '../utils/API';
+import { searchGoogleBooks } from '../utils/queries';
+import { useMutation, useQuery } from '@apollo/client';
+import { SAVE_BOOK } from '../utils/mutations';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 const SearchBooks = () => {
@@ -64,6 +66,8 @@ const SearchBooks = () => {
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
 
+    
+
     const [saveBook, { error, data }] = useMutation(SAVE_BOOK);
 
     // get token
@@ -75,6 +79,8 @@ const SearchBooks = () => {
 
     try {
       const { data } = await saveBook(bookToSave, token);
+
+      console.log(data)
 
       if (!response.ok) {
         throw new Error('something went wrong!');

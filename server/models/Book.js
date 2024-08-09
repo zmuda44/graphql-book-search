@@ -19,7 +19,7 @@ const bookSchema = new Schema({
   image: {
     type: String,
   },
-  link: {
+  linbk: {
     type: String,
   },
   title: {
