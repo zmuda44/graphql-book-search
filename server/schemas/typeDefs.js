@@ -30,13 +30,15 @@ const typeDefs = `
   type Mutation {
   addUser(username: String!, email: String!, password: String!): Auth
   loginUser(email: String!, password: String!): Auth
-  saveBook(bookData: BookInput!): User
-  removeBook(bookId: String!): User
+
   }
 
 
 
 `;
+
+// saveBook(bookData: BookInput!): User
+// removeBook(bookId: String!): User
 
 module.exports = typeDefs;
 

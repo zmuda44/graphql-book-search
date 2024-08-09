@@ -8,7 +8,14 @@ const resolvers = {
       // Get and return all documents from the classes collection
       return await User.find({});
     },
+      // me: async (parent, args, context) => {
+  //   if (context.user) {
+  //     return User.findOne({ _id: context.user._id }).populate('thoughts');
+  //   }
+  //   throw AuthenticationError;
+  // },
   },
+
   Mutation: {
     addUser: async (parent, args) => {
 
@@ -37,7 +44,24 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
+    },
+    // saveBook: async (parent, { thoughtText }, context) => {
+    //   if (context.user) {
+    //     const thought = await Thought.create({
+    //       thoughtText,
+    //       thoughtAuthor: context.user.username,
+    //     });
+
+    //     await User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $addToSet: { thoughts: thought._id } }
+    //     );
+
+    //     return thought;
+    //   }
+    //   throw AuthenticationError;
+    //   ('You need to be logged in!');
+    // }
   }
 };
 
