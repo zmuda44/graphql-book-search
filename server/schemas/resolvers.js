@@ -22,6 +22,10 @@ const resolvers = {
       const { username, email, password } = args;
       const user = await User.create({ username, email, password });
 
+      if (!user) {
+        return res.status(400).json({ message: 'Something is wrong!' });
+      }
+
       const token = signToken(user);
 
       console.log(token)
@@ -29,6 +33,7 @@ const resolvers = {
       return { token, user };
     },
     loginUser: async (parent, { email, password }) => {
+  
       const user = await User.findOne({ email});
 
       if (!user) {
@@ -45,6 +50,39 @@ const resolvers = {
 
       return { token, user };
     },
+    saveBook: async (parent, { userId, bookId, authors, title, description, image },) => {
+    // saveBook: async (parent, { args }) => {
+
+
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { savedBooks: {bookId: bookId, title: title, description: description, image: image } }  },
+          { new: true, runValidators: true }
+        );
+
+        const token = signToken(updatedUser);
+
+        return { token, updatedUser }
+
+    },
+
+
+  //   async deleteBook({ user, params }, res) {
+  //     const updatedUser = await User.findOneAndUpdate(
+  //       { _id: user._id },
+  //       { $pull: { savedBooks: { bookId: params.bookId } } },
+  //       { new: true }
+  //     );
+  //     if (!updatedUser) {
+  //       return res.status(404).json({ message: "Couldn't find user with this id!" });
+  //     }
+  //     return res.json(updatedUser);
+  //   },
+  // };
+
+
+
+
     // saveBook: async (parent, { thoughtText }, context) => {
     //   if (context.user) {
     //     const thought = await Thought.create({

@@ -1,5 +1,4 @@
-const typeDefs = `
-  # Define which fields are accessible from the Class model
+const typeDefs = ` 
   type User {
     _id: ID
     username: String
@@ -8,8 +7,7 @@ const typeDefs = `
     savedBooks: [Book]
   }
 
-  type Book {
-    
+  type Book {    
     authors: [String]
     description: String
     bookId: String
@@ -30,7 +28,7 @@ const typeDefs = `
   type Mutation {
   addUser(username: String!, email: String!, password: String!): Auth
   loginUser(email: String!, password: String!): Auth
-
+  saveBook(userId: ID!, bookId: String!, authors: String, title: String, description: String, image: String): Auth
   }
 
 
